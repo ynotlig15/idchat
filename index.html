@@ -18,9 +18,9 @@
   <button onclick="sendMessage()">Enviar</button>
 
   <script>
-    // Dados do Supabase
+    // Inicialização correta do Supabase
     const supabaseUrl = 'https://ztwlgdyxzsteqwwxkegs.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0d2xnZHl4enN0ZXF3d3hrZWdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkyNTc4MzcsImV4cCI6MjA2NDgzMzgzN30.Y1mrS_x3chmD500lp2yjPRpY364g09AtOjccyInwHcM';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // Substitua pela sua chave correta
     const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
     // Função para enviar mensagens ao Supabase
@@ -28,7 +28,7 @@
       const content = document.getElementById('messageInput').value.trim();
       if (!content) return;
 
-      const { error } = await supabase.from('maitestsid').insert([{ content }]);
+      const { error } = await supabase.from('public.maitestsid').insert([{ content }]);
 
       if (error) {
         console.error('Erro ao enviar mensagem:', error.message);
@@ -41,7 +41,7 @@
 
     // Função para carregar mensagens do Supabase
     async function loadMessages() {
-      const { data, error } = await supabase.from('maitestsid').select('*').order('created_at', { ascending: true });
+      const { data, error } = await supabase.from('public.maitestsid').select('*').order('created_at', { ascending: true });
 
       if (error) {
         console.error('Erro ao carregar mensagens:', error.message);
